@@ -13,7 +13,16 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
+  #Output$ID indicates a recipe
+  output$summary <- renderPrint({ #Render function wraps the code. Each render{Type} function is designed to produce a specific output. renderPrint here displays a statistical summary with fixed-width (verbatim) text
+    # dataset <- get(input$dataset, "package:datasets") # Avoid duplicated code; create a reactive expression instead
+    summary(dataset)
+  })
 
+  output$table <- renderTable({ #Render table is paired with tableOutput() to show the input data in a table
+    # dataset <- get(input$dataset, "package:datasets") # Avoid duplicated code; create a reactive expression instead
+    dataset
+  })
 }
 
 shinyApp(ui, server)
